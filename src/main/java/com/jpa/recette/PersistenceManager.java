@@ -3,14 +3,16 @@ package com.jpa.recette;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 public final class PersistenceManager {
 
-    private static EntityManagerFactory S_INSTANCE;
+    private static EntityManagerFactory emf;
 
-    private static EntityManager DAO_LAYER;
+    private static EntityManager em;
 
-    private final static String persistenceUnitName = "myPU";
+    private final static String PERSISTANCE_NAME = "myPU"; //NOM DE L'UNITE DE PERSISTANCE CIBLEE
 
     //CREATION DE NOTRE CONSTRUCTEUR EN PRIVATE
     private PersistenceManager() {
@@ -19,21 +21,20 @@ public final class PersistenceManager {
 
     //CONNEXION A LA BASE DE DONNEES
     public static EntityManager getEntityManager() {
-        if(S_INSTANCE == null || !S_INSTANCE.isOpen()) {
-            S_INSTANCE = Persistence.createEntityManagerFactory(persistenceUnitName);
-            DAO_LAYER = S_INSTANCE.createEntityManager();
-        }
-        return DAO_LAYER;
+        //CREATION DE L'ENTITY MANAGER FACTORY
+        emf = Persistence.createEntityManagerFactory(PERSISTANCE_NAME);
+        //CREATION DE L'ENTITY MANAGER
+        em = emf.createEntityManager();
+        return em;
     }
+
 
 
     //DECONNEXION DE LA BASE DE DONNEES
     public static void closeConnection() {
-        try {
-            S_INSTANCE.close();
-        } catch (Exception e) {
-            System.err.println("Fermeture de la connexion impossible");
-        }
+       if(emf!=null && emf.isOpen()){
+          emf.close();
+       }
     }
 
 

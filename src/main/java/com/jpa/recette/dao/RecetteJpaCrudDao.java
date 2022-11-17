@@ -11,12 +11,12 @@ import java.util.Optional;
 public class RecetteJpaCrudDao implements CrudDao<Recette> {
 
     //va permettre de nous connecter à la BDD
-    private EntityManagerFactory emf = PersistenceManager.getEntityManager().getEntityManagerFactory();
+    private EntityManager em = PersistenceManager.getEntityManager();
 
     @Override
     public List<Recette> findAll() {
         List<Recette> recetteList = new ArrayList<>();
-        EntityManager em = emf.createEntityManager();
+      //  EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
@@ -36,7 +36,7 @@ public class RecetteJpaCrudDao implements CrudDao<Recette> {
 
     @Override
     public Optional<Recette> findById(Long id) {
-        EntityManager em = emf.createEntityManager();
+     //   EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
@@ -57,7 +57,7 @@ public class RecetteJpaCrudDao implements CrudDao<Recette> {
 
     @Override
     public boolean delete(Long id) {
-        EntityManager em = emf.createEntityManager();
+    //    EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try{
             et.begin();
@@ -77,7 +77,7 @@ public class RecetteJpaCrudDao implements CrudDao<Recette> {
     @Override
     public Recette update(Recette element) {
         Recette recetteUpdated = null;
-        EntityManager em = emf.createEntityManager();
+   //     EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try{
             et.begin();
@@ -95,7 +95,7 @@ public class RecetteJpaCrudDao implements CrudDao<Recette> {
 
     @Override
     public Recette create(Recette element) {
-        EntityManager em = emf.createEntityManager();
+    //    EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try{
             et.begin();
@@ -108,10 +108,6 @@ public class RecetteJpaCrudDao implements CrudDao<Recette> {
         }finally {
             em.close();
         }
-
-
-
-
         return null;
     }
 }

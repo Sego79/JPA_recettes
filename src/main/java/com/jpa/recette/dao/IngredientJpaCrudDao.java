@@ -1,7 +1,7 @@
 package com.jpa.recette.dao;
 
+
 import com.jpa.recette.entity.Ingredient;
-import com.jpa.recette.entity.Recette;
 
 import java.util.List;
 import java.util.Optional;
